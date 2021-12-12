@@ -8,7 +8,7 @@ RSpec.describe 'Application new form page' do
                               state: "Colorado",
                               zip_code: 80514,
                               reason: "Lots of love to give",
-                              status: "Applied")
+                              status: "In Progress")
     steve = Application.create!(applicant_name: "Steve Irwin",
                               address: "333 Wallaby Blvd",
                               city: "Orlando",
@@ -33,7 +33,7 @@ RSpec.describe 'Application new form page' do
 
     click_button "Submit"
 
-    expect(current_path).to eq("/applications/#{Application.ids.last}")
+    expect(current_path).to eq("/applications/#{Application.all.last.id}")
     expect(page).to have_content("Steve Irwin")
     expect(page).to_not have_content("Sam Neill")
     expect(page).to have_content("333 Wallaby Blvd")
@@ -42,5 +42,25 @@ RSpec.describe 'Application new form page' do
     expect(page).to have_content(32789)
     # expect(page).to have_content("Crikey")
     # expect(page).to have_content("In Progress")
+  end
+
+  it "redirects to form if given invalid data" do
+    steve = Application.create!(applicant_name: "Steve Irwin",
+                              address: "333 Wallaby Blvd",
+                              city: "Orlando",
+                              state: "Florida",
+                              zip_code: 32789,
+                              reason: "Crikey",
+                              status: "In Progress")
+    visit "/applications/new"
+
+
+    expect(current_path).to eq("/applications/new")
+    fill_in :applicant_name, with: 'Steve Irwin'
+    click_button "Submit"
+
+    expect(page).to have_content("Error: Fields can not be left blank")
+    expect(page).to have_current_path("/applications/new")
+
   end
 end
