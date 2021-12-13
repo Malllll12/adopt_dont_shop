@@ -40,8 +40,8 @@ RSpec.describe 'Application new form page' do
     expect(page).to have_content("Orlando")
     expect(page).to have_content("Florida")
     expect(page).to have_content(32789)
-    # expect(page).to have_content("Crikey")
-    # expect(page).to have_content("In Progress")
+    expect(page).to have_content("Crikey")
+    expect(page).to have_content("In Progress")
   end
 
   it "redirects to form if given invalid data" do
