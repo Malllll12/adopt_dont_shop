@@ -22,7 +22,7 @@ class ApplicationsController < ApplicationController
     if params[:search].present?
       @pets = Pet.search(params[:search])
     else
-      @pets = @application.pets
+      @pets = Pet.all
     end
   end
 

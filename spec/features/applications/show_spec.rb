@@ -46,6 +46,6 @@ it "finds pet by name" do
 
     expect(page).to have_content(pet_2.name)
     expect(page).to_not have_content(pet_1.name)
-    save_and_open_page
+    
   end
 end
