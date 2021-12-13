@@ -17,4 +17,5 @@
 <% @pets.each do |pet| %>
   <%= pet.name %>
   <%= link_to "#{pet.name}", "pets/#{pet.id}" %>
+  <%= button_to "Adopt This Pet", "/applications/#{@application.id}", method: :get %>
 <% end %>
