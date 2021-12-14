@@ -101,4 +101,26 @@ RSpec.describe 'Application show page', type: :feature do
     expect(page).to_not have_content("In Progress")
     expect(page).to have_content("Lots of love to give")
   end
+
+#   As a visitor
+# When I visit an application's show page
+# And I have not added any pets to the application
+# Then I do not see a section to submit my application
+  it 'does not submit application if no pets added' do
+    shelter = Shelter.create!(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
+    shelter_2 = Shelter.create!(name: 'Mystery Building', city: 'Irvine CA', foster_program: false, rank: 9)
+    sam = Application.create!(applicant_name: "Sam Neill",
+                              address: "123 Wilderpeople Way",
+                              city: "Eerie",
+                              state: "Colorado",
+                              zip_code: 80514,
+                              reason: "Lots of love to give",
+                              status: "In Progress")
+    pet_1 = Pet.create!(adoptable: true, age: 1, breed: 'sphynx', name: 'Lucille Bald', shelter_id: shelter.id)
+    pet_2 = Pet.create!(adoptable: true, age: 1, breed: 'sphynx', name: 'Rock', shelter_id: shelter.id)
+    pet_3 = Pet.create!(adoptable: true, age: 2, breed: 'Great Dane', name: 'Scooby', shelter_id: shelter.id)
+    visit "/applications/#{sam.id}"
+
+    expect(page).to_not have_content("Submit")
+  end
 end
