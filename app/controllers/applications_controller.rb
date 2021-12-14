@@ -9,6 +9,7 @@ class ApplicationsController < ApplicationController
 
   def create
     application = Application.new(app_params)
+    application.status = "In Progress"
     if application.save
       redirect_to "/applications/#{application.id}"
     else
@@ -24,6 +25,13 @@ class ApplicationsController < ApplicationController
     else
       @pets = Pet.all
     end
+  end
+
+  def update
+    application = Application.find(params[:id])
+    application.status = "Pending"
+    application.update(app_params)
+    redirect_to "/applications/#{application.id}"
   end
 
   private

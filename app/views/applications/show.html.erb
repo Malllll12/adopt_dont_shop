@@ -14,8 +14,16 @@
   <%= f.submit "Search" %>
 <% end %>
 
-<% @pets.each do |pet| %>
-  <%= pet.name %>
-  <%= link_to "#{pet.name}", "pets/#{pet.id}" %>
-  <%= button_to "Adopt This Pet", "/applications/#{@application.id}", method: :get %>
+<% if @pets.present? %>
+  <% @pets.each do |pet| %>
+    <%= pet.name %>
+    <%= link_to "#{pet.name}", "pets/#{pet.id}" %>
+    <%= button_to "Adopt This Pet", "/pets_applications/new", method: :post, params: {:application_id => @application.id, :pet_id => pet.id} %>
+  <% end %>
 <% end %>
+
+<%= form_with url: "/applications/#{@application.id}", method: :patch, local: true do |f| %>
+  <%= f.label :reason %>
+  <%= f.text_field :reason %>
+  <%= f.submit "Submit" %>
+  <% end %>
