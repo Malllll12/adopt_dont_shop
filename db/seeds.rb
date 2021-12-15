@@ -24,3 +24,6 @@
 @pet_1 = Pet.create!(adoptable: true, age: 1, breed: 'sphynx', name: 'Lucille Bald', shelter_id: @shelter.id)
 @pet_2 = Pet.create!(adoptable: true, age: 1, breed: 'sphynx', name: 'Rock', shelter_id: @shelter.id)
 @pet_3 = Pet.create!(adoptable: true, age: 2, breed: 'Great Dane', name: 'Scooby', shelter_id: @shelter.id)
+@pet_4 = Pet.create!(adoptable: true, age: 1, breed: 'Pit Bull', name: 'RoccO', shelter_id: shelter.id)
+@pet_5 = Pet.create!(adoptable: true, age: 1, breed: 'Labrador', name: 'ROCK', shelter_id: shelter.id)
+@pet_6 = Pet.create!(adoptable: true, age: 2, breed: 'Basset Hound', name: 'Rocky', shelter_id: shelter.id)
